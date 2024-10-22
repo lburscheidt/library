@@ -60,3 +60,12 @@ myLibrary.forEach((book) => {
   bookDiv.appendChild(readDiv);
   main.appendChild(bookDiv);
 });
+const dialog = document.querySelector("dialog");
+const showButton = document.querySelector("#new-book");
+const closeButton = document.querySelector("dialog button");
+showButton.addEventListener("click", () => {
+  dialog.showModal();
+});
+closeButton.addEventListener("click", () => {
+  dialog.close();
+});

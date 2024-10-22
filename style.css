@@ -72,8 +72,40 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   background-color: aqua;
+}
+
+dialog {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  position: absolute;
+  float: left;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+input {
+  border: 1px solid black;
+  margin-bottom: 20px;
+}
+
+.x {
+  align-self: flex-end;
+}
+
+::backdrop {
+  background-color: rgba(128, 128, 128, 0.75);
 }
 
 header {
@@ -119,11 +151,13 @@ aside {
 }
 
 button {
-  margin-top: 50px;
-  width: 150px;
-  height: 50px;
+  padding: 10px 20px;
   border-radius: 0.5rem;
   border: 1px solid black;
+}
+
+#new-book {
+  margin-top: 50px;
 }
 
 .book {
