@@ -1,0 +1,133 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+/*reset ends */
+
+:root {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  background-color: aqua;
+}
+
+header {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  background-color: pink;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+content {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+main {
+  flex-shrink: 2;
+  width: 75%;
+  height: 100%;
+  background-color: blue;
+  display: grid;
+  grid-template-columns: repeat(3, calc(80% / 3));
+  grid-template-rows: repeat(3, calc(80% / 3));
+  gap: 5%;
+  padding-top: 3%;
+  justify-content: center;
+  justify-items: stretch;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  flex-shrink: 1;
+  width: 25%;
+  height: 100%;
+  background-color: yellow;
+}
+
+button {
+  margin-top: 50px;
+  width: 150px;
+  height: 50px;
+  border-radius: 0.5rem;
+  border: 1px solid black;
+}
+
+.book {
+  border: 3px solid black;
+  display: flex;
+  flex-direction: column;
+}

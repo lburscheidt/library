@@ -28,3 +28,5 @@ function addBookToLibrary() {
   let book = new Book(title, author, pages, read);
   myLibrary.push(book);
 }
+
+//loop through array and display all books on the page
