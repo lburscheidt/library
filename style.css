@@ -112,10 +112,13 @@ header {
   display: flex;
   flex-direction: column;
   height: 100px;
-  background-color: pink;
+  background-color: #bcb147;
+  color: white;
   width: 100%;
   align-items: center;
   justify-content: center;
+  font-size: 2rem;
+  font-weight: bold;
 }
 
 content {
@@ -129,7 +132,7 @@ content {
   flex-shrink: 2;
   width: 75%;
   height: 100%;
-  background-color: blue;
+  background-color: #48bcb0;
   display: grid;
   grid-template-columns: repeat(3, calc(80% / 3));
   grid-template-rows: repeat(3, calc(80% / 3));
@@ -147,14 +150,14 @@ aside {
   flex-shrink: 1;
   width: 25%;
   height: 100%;
-  background-color: yellow;
+  background-color: #56e2d4;
 }
 
-button,
-#submit {
+button {
   padding: 10px 20px;
   border-radius: 0.5rem;
-  border: 1px solid black;
+  border: none;
+  background-color: #48bcb0;
 }
 
 #new-book {
@@ -162,18 +165,32 @@ button,
 }
 
 .book {
-  border: 3px solid black;
   display: flex;
   flex-direction: column;
+}
 
-  justify-content: space-around;
+.book-div {
+  padding: 15px;
+  background-color: #70e9dd;
+  border: none;
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.title {
+  font-style: italic;
+  font-weight: bold;
 }
 
 .book button {
   width: 50%;
   min-width: 90px;
+  gap: 10px;
 }
 
 .buttons-div {
   display: flex;
+  gap: 10px;
 }

@@ -45,15 +45,18 @@ let main = document.querySelector("#main");
 function loopLibrary() {
   main.innerHTML = "";
   myLibrary.forEach((book) => {
+    let card = document.createElement("div");
+    card.classList.add("book-div");
     let bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
     bookDiv.dataset.index = myLibrary.indexOf(book);
     let titleDiv = document.createElement("p");
     titleDiv.textContent = book.title;
+    titleDiv.classList.add("title");
     let authorDiv = document.createElement("p");
     authorDiv.textContent = book.author;
     let pagesDiv = document.createElement("p");
-    pagesDiv.textContent = book.pages;
+    pagesDiv.textContent = book.pages + " pages";
     let readDiv = document.createElement("p");
     let removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
@@ -69,7 +72,7 @@ function loopLibrary() {
     bookDiv.appendChild(authorDiv);
     bookDiv.appendChild(pagesDiv);
     bookDiv.appendChild(readDiv);
-    bookDiv.appendChild(buttonsDiv);
+
     buttonsDiv.appendChild(readButton);
     buttonsDiv.appendChild(removeButton);
 
@@ -92,7 +95,9 @@ function loopLibrary() {
       loopLibrary();
     });
 
-    main.appendChild(bookDiv);
+    main.appendChild(card);
+    card.appendChild(bookDiv);
+    card.appendChild(buttonsDiv);
   });
 }
 
