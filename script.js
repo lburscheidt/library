@@ -53,14 +53,21 @@ function loopLibrary() {
     let pagesDiv = document.createElement("p");
     pagesDiv.textContent = book.pages;
     let readDiv = document.createElement("p");
+    let removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
     let readButton = document.createElement("button");
-    readButton.textContent = "mark read | unread";
+    readButton.textContent = "read | unread";
+    let buttonsDiv = document.createElement("div");
+    buttonsDiv.classList.add("buttons-div");
+
     readDiv.textContent = book.read;
     bookDiv.appendChild(titleDiv);
     bookDiv.appendChild(authorDiv);
     bookDiv.appendChild(pagesDiv);
     bookDiv.appendChild(readDiv);
-    bookDiv.appendChild(readButton);
+    bookDiv.appendChild(buttonsDiv);
+    buttonsDiv.appendChild(readButton);
+    buttonsDiv.appendChild(removeButton);
     main.appendChild(bookDiv);
   });
 }
