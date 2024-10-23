@@ -43,10 +43,21 @@ console.log(myLibrary);
 let main = document.querySelector("#main");
 
 function loopLibrary() {
+  main.innerHTML = "";
   myLibrary.forEach((book) => {
     let bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
     bookDiv.dataset.index = myLibrary.indexOf(book);
+    bookDiv.addEventListener("click", (e) => {
+      let target = e.target;
+      if ((target.class = "remove")) {
+        let index = bookDiv.dataset.index;
+        console.log(index);
+        myLibrary.splice(index, 1);
+        console.log(myLibrary);
+        loopLibrary();
+      }
+    });
     let titleDiv = document.createElement("p");
     titleDiv.textContent = book.title;
     let authorDiv = document.createElement("p");
@@ -56,6 +67,7 @@ function loopLibrary() {
     let readDiv = document.createElement("p");
     let removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
+    removeButton.classList.add("remove");
     let readButton = document.createElement("button");
     readButton.textContent = "read | unread";
     let buttonsDiv = document.createElement("div");
