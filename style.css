@@ -166,3 +166,8 @@ button,
   display: flex;
   flex-direction: column;
 }
+
+.book button {
+  width: 50%;
+  min-width: 90px;
+}

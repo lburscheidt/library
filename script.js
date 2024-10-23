@@ -32,11 +32,6 @@ goodOmens = new Book("Good Omens", "Neil Gaiman", 400, "read");
 
 //add book to library
 function addBookToLibrary(book) {
-  //  let title = prompt("Enter title");
-  //  let author = prompt("Enter author");
-  //  let pages = prompt("Enter number of pages");
-  //  let read = prompt("Read or not read?");
-  //  let book = new Book(title, author, pages, read);
   myLibrary.push(book);
 }
 addBookToLibrary(theHobbit);
@@ -58,11 +53,14 @@ function loopLibrary() {
     let pagesDiv = document.createElement("p");
     pagesDiv.textContent = book.pages;
     let readDiv = document.createElement("p");
+    let readButton = document.createElement("button");
+    readButton.textContent = "mark read | unread";
     readDiv.textContent = book.read;
     bookDiv.appendChild(titleDiv);
     bookDiv.appendChild(authorDiv);
     bookDiv.appendChild(pagesDiv);
     bookDiv.appendChild(readDiv);
+    bookDiv.appendChild(readButton);
     main.appendChild(bookDiv);
   });
 }
