@@ -46,6 +46,7 @@ function loopLibrary() {
   myLibrary.forEach((book) => {
     let bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
+    bookDiv.dataset.index = myLibrary.indexOf(book);
     let titleDiv = document.createElement("p");
     titleDiv.textContent = book.title;
     let authorDiv = document.createElement("p");
