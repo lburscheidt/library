@@ -1,3 +1,7 @@
+document.addEventListener("DOMContentLoaded", () => {
+  loopLibrary();
+});
+
 //Library object
 
 const myLibrary = [];
@@ -21,7 +25,7 @@ theNeuromancer = new Book(
   "The Neuromancer",
   "William Gibson",
   450,
-  "not read yet"
+  "not read yet",
 );
 
 goodOmens = new Book("Good Omens", "Neil Gaiman", 400, "read");
@@ -43,29 +47,61 @@ console.log(myLibrary);
 //loop through array and display all books on the page
 let main = document.querySelector("#main");
 
-myLibrary.forEach((book) => {
-  let bookDiv = document.createElement("div");
-  bookDiv.classList.add("book");
-  let titleDiv = document.createElement("p");
-  titleDiv.textContent = book.title;
-  let authorDiv = document.createElement("p");
-  authorDiv.textContent = book.author;
-  let pagesDiv = document.createElement("p");
-  pagesDiv.textContent = book.pages;
-  let readDiv = document.createElement("p");
-  readDiv.textContent = book.read;
-  bookDiv.appendChild(titleDiv);
-  bookDiv.appendChild(authorDiv);
-  bookDiv.appendChild(pagesDiv);
-  bookDiv.appendChild(readDiv);
-  main.appendChild(bookDiv);
-});
-const dialog = document.querySelector("dialog");
+function loopLibrary() {
+  myLibrary.forEach((book) => {
+    let bookDiv = document.createElement("div");
+    bookDiv.classList.add("book");
+    let titleDiv = document.createElement("p");
+    titleDiv.textContent = book.title;
+    let authorDiv = document.createElement("p");
+    authorDiv.textContent = book.author;
+    let pagesDiv = document.createElement("p");
+    pagesDiv.textContent = book.pages;
+    let readDiv = document.createElement("p");
+    readDiv.textContent = book.read;
+    bookDiv.appendChild(titleDiv);
+    bookDiv.appendChild(authorDiv);
+    bookDiv.appendChild(pagesDiv);
+    bookDiv.appendChild(readDiv);
+    main.appendChild(bookDiv);
+  });
+}
+
+const dialog = document.querySelector("#dialog");
 const showButton = document.querySelector("#new-book");
-const closeButton = document.querySelector("dialog button");
+const closeButton = document.querySelector(".x");
+const submitButton = document.querySelector("#submit_2");
+
 showButton.addEventListener("click", () => {
   dialog.showModal();
 });
 closeButton.addEventListener("click", () => {
   dialog.close();
 });
+submitButton.addEventListener("click", () => {
+  dialog.close();
+  getInput();
+  loopLibrary();
+});
+
+// function getInput() {
+//   let inputTitle = document.querySelector("#title").value;
+//   console.log(inputTitle);
+// }
+
+function getInput() {
+  let inputTitle = document.querySelector("#title").value;
+  let inputAuthor = document.querySelector("#author").value;
+  let inputPages = document.querySelector("#pages").value;
+  let inputRead;
+  if (document.querySelector("#read").checked) {
+    inputRead = "read";
+  } else {
+    inputRead = "not read yet";
+  }
+
+  let inputBook = new Book(inputTitle, inputAuthor, inputPages, inputRead);
+  console.log(inputBook);
+  addBookToLibrary(inputBook);
+  console.log(myLibrary);
+}

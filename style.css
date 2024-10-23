@@ -76,7 +76,7 @@ body {
   background-color: aqua;
 }
 
-dialog {
+dialog[open] {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -150,7 +150,8 @@ aside {
   background-color: yellow;
 }
 
-button {
+button,
+#submit {
   padding: 10px 20px;
   border-radius: 0.5rem;
   border: 1px solid black;
