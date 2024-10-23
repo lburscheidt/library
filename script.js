@@ -48,16 +48,6 @@ function loopLibrary() {
     let bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
     bookDiv.dataset.index = myLibrary.indexOf(book);
-    bookDiv.addEventListener("click", (e) => {
-      let target = e.target;
-      if ((target.class = "remove")) {
-        let index = bookDiv.dataset.index;
-        console.log(index);
-        myLibrary.splice(index, 1);
-        console.log(myLibrary);
-        loopLibrary();
-      }
-    });
     let titleDiv = document.createElement("p");
     titleDiv.textContent = book.title;
     let authorDiv = document.createElement("p");
@@ -70,6 +60,7 @@ function loopLibrary() {
     removeButton.classList.add("remove");
     let readButton = document.createElement("button");
     readButton.textContent = "read | unread";
+    readButton.classList.add("read");
     let buttonsDiv = document.createElement("div");
     buttonsDiv.classList.add("buttons-div");
 
@@ -81,6 +72,28 @@ function loopLibrary() {
     bookDiv.appendChild(buttonsDiv);
     buttonsDiv.appendChild(readButton);
     buttonsDiv.appendChild(removeButton);
+
+    bookDiv.addEventListener("click", (e) => {
+      let target = e.target;
+
+      let index = bookDiv.dataset.index;
+      switch (target.className) {
+        case "remove":
+          myLibrary.splice(index, 1);
+          loopLibrary();
+          break;
+        case "read":
+          let read = myLibrary[index].read;
+          if (read === "read") {
+            myLibrary[index].read = "not read yet";
+            loopLibrary();
+          } else {
+            myLibrary[index].read = "read";
+            loopLibrary();
+          }
+          break;
+      }
+    });
     main.appendChild(bookDiv);
   });
 }
