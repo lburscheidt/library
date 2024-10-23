@@ -75,25 +75,23 @@ function loopLibrary() {
 
     bookDiv.addEventListener("click", (e) => {
       let target = e.target;
-
       let index = bookDiv.dataset.index;
       switch (target.className) {
         case "remove":
           myLibrary.splice(index, 1);
-          loopLibrary();
           break;
         case "read":
           let read = myLibrary[index].read;
           if (read === "read") {
             myLibrary[index].read = "not read yet";
-            loopLibrary();
           } else {
             myLibrary[index].read = "read";
-            loopLibrary();
           }
           break;
       }
+      loopLibrary();
     });
+
     main.appendChild(bookDiv);
   });
 }
@@ -114,11 +112,6 @@ submitButton.addEventListener("click", () => {
   getInput();
   loopLibrary();
 });
-
-// function getInput() {
-//   let inputTitle = document.querySelector("#title").value;
-//   console.log(inputTitle);
-// }
 
 function getInput() {
   let inputTitle = document.querySelector("#title").value;
