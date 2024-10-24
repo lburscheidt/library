@@ -165,11 +165,6 @@ button {
 }
 
 .book {
-  display: flex;
-  flex-direction: column;
-}
-
-.book-div {
   padding: 15px;
   background-color: #70e9dd;
   border: none;

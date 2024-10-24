@@ -45,18 +45,15 @@ let main = document.querySelector("#main");
 function loopLibrary() {
   main.innerHTML = "";
   myLibrary.forEach((book) => {
-    let card = document.createElement("div");
-    card.classList.add("book-div");
     let bookDiv = document.createElement("div");
     bookDiv.classList.add("book");
     bookDiv.dataset.index = myLibrary.indexOf(book);
     let titleDiv = document.createElement("p");
     titleDiv.textContent = book.title;
-    titleDiv.classList.add("title");
     let authorDiv = document.createElement("p");
     authorDiv.textContent = book.author;
     let pagesDiv = document.createElement("p");
-    pagesDiv.textContent = book.pages + " pages";
+    pagesDiv.textContent = book.pages;
     let readDiv = document.createElement("p");
     let removeButton = document.createElement("button");
     removeButton.textContent = "Remove";
@@ -72,32 +69,32 @@ function loopLibrary() {
     bookDiv.appendChild(authorDiv);
     bookDiv.appendChild(pagesDiv);
     bookDiv.appendChild(readDiv);
-
+    bookDiv.appendChild(buttonsDiv);
     buttonsDiv.appendChild(readButton);
     buttonsDiv.appendChild(removeButton);
 
     bookDiv.addEventListener("click", (e) => {
       let target = e.target;
+
       let index = bookDiv.dataset.index;
       switch (target.className) {
         case "remove":
           myLibrary.splice(index, 1);
+          loopLibrary();
           break;
         case "read":
           let read = myLibrary[index].read;
           if (read === "read") {
             myLibrary[index].read = "not read yet";
+            loopLibrary();
           } else {
             myLibrary[index].read = "read";
+            loopLibrary();
           }
           break;
       }
-      loopLibrary();
     });
-
-    main.appendChild(card);
-    card.appendChild(bookDiv);
-    card.appendChild(buttonsDiv);
+    main.appendChild(bookDiv);
   });
 }
 
@@ -117,6 +114,11 @@ submitButton.addEventListener("click", () => {
   getInput();
   loopLibrary();
 });
+
+// function getInput() {
+//   let inputTitle = document.querySelector("#title").value;
+//   console.log(inputTitle);
+// }
 
 function getInput() {
   let inputTitle = document.querySelector("#title").value;
