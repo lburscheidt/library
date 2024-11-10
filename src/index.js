@@ -1,14 +1,15 @@
 import "./style.css";
 
-document.addEventListener("DOMContentLoaded", () => {
-	loopLibrary();
-});
-
-//Library object
-
+const closeBtn = document.querySelector(".closeBtn");
+const dialog = document.querySelector("#dialog");
+const library = document.querySelector("#library");
 const myLibrary = [];
+const newBookBtn = document.querySelector("#newBookBtn");
+const submitBtn = document.querySelector("#submitBtn");
 
-//Object constructor for books
+window.onload = () => {
+	createLibraryCards();
+};
 
 function Book(title, author, pages, read) {
 	this.title = title;
@@ -21,31 +22,12 @@ Book.prototype.info = function () {
 	return `${this.title} by ${this.author}. ${this.pages} pages. ${this.read}.`;
 };
 
-//testing book object constructor
-const theHobbit = new Book("The Hobbit", "Tolkien", 295, "read");
-const theNeuromancer = new Book(
-	"The Neuromancer",
-	"William Gibson",
-	450,
-	"not read yet",
-);
-
-const goodOmens = new Book("Good Omens", "Neil Gaiman", 400, "read");
-
-//add book to library
 function addBookToLibrary(book) {
 	myLibrary.push(book);
 }
-addBookToLibrary(theHobbit);
-addBookToLibrary(theNeuromancer);
-addBookToLibrary(goodOmens);
-console.log(myLibrary);
 
-//loop through array and display all books on the page
-const main = document.querySelector("#main");
-
-function loopLibrary() {
-	main.innerHTML = "";
+function createLibraryCards() {
+	library.innerHTML = "";
 	for (const book of myLibrary) {
 		const bookDiv = document.createElement("div");
 		bookDiv.classList.add("book");
@@ -77,51 +59,40 @@ function loopLibrary() {
 
 		bookDiv.addEventListener("click", (e) => {
 			const target = e.target;
-
 			const index = bookDiv.dataset.index;
 			switch (target.className) {
 				case "remove":
 					myLibrary.splice(index, 1);
-					loopLibrary();
+					createLibraryCards();
 					break;
 				case "read": {
 					const read = myLibrary[index].read;
 					if (read === "read") {
 						myLibrary[index].read = "not read yet";
-						loopLibrary();
+						createLibraryCards();
 					} else {
 						myLibrary[index].read = "read";
-						loopLibrary();
+						createLibraryCards();
 					}
 					break;
 				}
 			}
 		});
-		main.appendChild(bookDiv);
+		library.appendChild(bookDiv);
 	}
 }
 
-const dialog = document.querySelector("#dialog");
-const showButton = document.querySelector("#new-book");
-const closeButton = document.querySelector(".x");
-const submitButton = document.querySelector("#submit_2");
-
-showButton.addEventListener("click", () => {
+newBookBtn.addEventListener("click", () => {
 	dialog.showModal();
 });
-closeButton.addEventListener("click", () => {
+closeBtn.addEventListener("click", () => {
 	dialog.close();
 });
-submitButton.addEventListener("click", () => {
+submitBtn.addEventListener("click", () => {
 	dialog.close();
 	getInput();
-	loopLibrary();
+	createLibraryCards();
 });
-
-// function getInput() {
-//   let inputTitle = document.querySelector("#title").value;
-//   console.log(inputTitle);
-// }
 
 function getInput() {
 	const inputTitle = document.querySelector("#title").value;
