@@ -88,7 +88,8 @@ newBookBtn.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
 	dialog.close();
 });
-submitBtn.addEventListener("click", () => {
+submitBtn.addEventListener("click", (e) => {
+	e.preventDefault();
 	dialog.close();
 	getInput();
 	createLibraryCards();
