@@ -88,7 +88,7 @@ newBookBtn.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
 	dialog.close();
 });
-submitBtn.addEventListener("click", (e) => {
+form.addEventListener("submit", (e) => {
 	e.preventDefault();
 	dialog.close();
 	getInput();
