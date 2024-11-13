@@ -1,6 +1,6 @@
 import "./style.css";
 
-const closeBtn = document.querySelector(".closeBtn");
+const closeBtn = document.querySelector("#closeBtn");
 const dialog = document.querySelector("#dialog");
 const library = document.querySelector("#library");
 const myLibrary = [];
@@ -9,11 +9,9 @@ const form = document.querySelector("#form");
 const title = document.querySelector("#title");
 const author = document.querySelector("#author");
 const pages = document.querySelector("#pages");
-const inputTitle = document.querySelector("#title").value;
-const inputAuthor = document.querySelector("#author").value;
-const inputPages = document.querySelector("#pages").value;
-const inputRead = document.querySelector("#read");
-const titleError = document.querySelector("#title +span.error");
+const readCheckbox = document.querySelector("#readCheckbox");
+const readBtn = document.querySelector(".read");
+const titleError = document.querySelector("#titleError");
 const authorError = document.querySelector("#author +span.error");
 const pagesError = document.querySelector("#pages +span.error");
 
@@ -21,17 +19,20 @@ window.onload = () => {
 	createLibraryCards();
 };
 
-function Book(title, author, pages, read) {
-	this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.read = read;
+class Book {
+	constructor(title, author, pages, read) {
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.read = read;
+	}
+	getInfo() {
+		return `${this.title} by ${this.author}. ${this.pages} pages. ${this.read}.`;
+	}
 }
 
-Book.prototype.info = function () {
-	return `${this.title} by ${this.author}. ${this.pages} pages. ${this.read}.`;
-};
-
+// const theHobbit = new Book("Hobbit", "Tolkien", "200", "read");
+// console.log(theHobbit);
 function addBookToLibrary(book) {
 	myLibrary.push(book);
 }
@@ -57,8 +58,8 @@ function createLibraryCards() {
 		readButton.classList.add("read");
 		const buttonsDiv = document.createElement("div");
 		buttonsDiv.classList.add("buttons-div");
-
 		readDiv.textContent = book.read;
+
 		bookDiv.appendChild(titleDiv);
 		bookDiv.appendChild(authorDiv);
 		bookDiv.appendChild(pagesDiv);
@@ -99,8 +100,8 @@ closeBtn.addEventListener("click", () => {
 	dialog.close();
 });
 
-title.addEventListener("click", (e) => {
-	if (title.validity.valid) {
+titleInput.addEventListener("click", (e) => {
+	if (titleInput.validity.valid) {
 		titleError.textContent = "";
 		titleError.className = "error";
 	} else {
@@ -108,8 +109,8 @@ title.addEventListener("click", (e) => {
 	}
 });
 
-title.addEventListener("input", (e) => {
-	if (title.validity.valid) {
+titleInput.addEventListener("input", (e) => {
+	if (titleInput.validity.valid) {
 		titleError.textContent = "";
 		titleError.className = "error";
 	} else {
@@ -118,24 +119,30 @@ title.addEventListener("input", (e) => {
 });
 
 form.addEventListener("submit", (e) => {
-	if (
-		!title.validity.valid ||
-		!author.validity.valid ||
-		!pages.validity.valid
-	) {
-		showError();
-		e.preventDefault();
-	} else {
-		e.preventDefault();
-		dialog.close();
-		getInput();
-		clearForm();
-		createLibraryCards();
-	}
+	//	if (
+	//	//	!title.validity.valid ||
+	//	//	!author.validity.valid ||
+	//	//	!pages.validity.valid
+	//	) {
+	//		showError();
+	//		e.preventDefault();
+	//	} else {
+	e.preventDefault();
+
+	const inputBook = new Book(
+		titleInput.value,
+		authorInput.value,
+		pagesInput.value,
+		setRead(),
+	);
+	addBookToLibrary(inputBook);
+	dialog.close();
+	clearForm();
+	createLibraryCards();
 });
 
 function showError() {
-	if (!title.validity.tooShort) {
+	if (!titleInput.validity.tooShort) {
 		console.log("There was an error");
 		titleError.textContent = "Title error";
 		titleError.className = "error active";
@@ -143,22 +150,15 @@ function showError() {
 }
 
 function clearForm() {
-	title.innerHTML = "";
-	author.innerHTML = "";
-	pages.innerHTML = "";
-	inputRead.checked = false;
+	titleInput.innerHTML = "";
+	authorInput.innerHTML = "";
+	pagesInput.innerHTML = "";
+	readCheckbox.checked = false;
 }
 
-function getInput() {
-	let inputRead;
-	if (document.querySelector("#read").checked) {
-		inputRead = "read";
-	} else {
-		inputRead = "not read yet";
+function setRead() {
+	if (readCheckbox.checked) {
+		return "read";
 	}
-
-	const inputBook = new Book(inputTitle, inputAuthor, inputPages, inputRead);
-	console.log(inputBook);
-	addBookToLibrary(inputBook);
-	console.log(myLibrary);
+	return "not read yet";
 }

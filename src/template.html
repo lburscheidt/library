@@ -14,15 +14,15 @@
     <section id="library"></section>
     <aside>
       <dialog id="dialog">
-        <button class="closeBtn" autofocus>X</button>
+        <button id="closeBtn" autofocus>X</button>
         <form id="form">
-          <label for="title">Title<input type="text" id="title" required minlength="1">
-            <span class="error" aria-live="polite"></span></label>
-          <label for="author">Author</label><input type="text" id="author" required minlength="1">
+          <label for="titleInput">Title<input type="text" id="titleInput" required minlength="1">
+            <span class="error" aria-live="polite" id="titleError"></span></label>
+          <label for="authorInput">Author</label><input type="text" id="authorInput" required minlength="1">
           <span class="error" aria-live="polite"></span>
-          <label for="pages">No. of pages</label><input type="number" id="pages" required>
+          <label for="pagesInput">No. of pages</label><input type="number" id="pagesInput" required>
           <span class="error" aria-live="polite"></span>
-          <label for="read">Read?</label><input type="checkbox" id="read">
+          <label for="readCheckbox">Read?</label><input type="checkbox" id="readCheckbox">
           <button type="submit" id="submitBtn">Submit</button>
         </form>
       </dialog>
