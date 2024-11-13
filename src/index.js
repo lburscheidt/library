@@ -36,20 +36,6 @@ function addEventListeners() {
 	}
 }
 
-function createNewBook() {
-	const addBook = new Book(
-		titleInput.value,
-		authorInput.value,
-		pagesInput.value,
-		setRead(),
-	);
-	addBookToLibrary(addBook);
-	dialog.close();
-	clearForm();
-	createLibraryCards();
-	addEventListeners();
-}
-
 form.addEventListener("submit", (e) => {
 	e.preventDefault();
 	const title = titleInput.value.trim();
@@ -62,8 +48,8 @@ form.addEventListener("submit", (e) => {
 		titleInput.parentNode.classList.remove("error");
 		titleInput.parentNode.classList.add("success");
 	}
-const author = authorInput.value.trim();
-if (title === "") {
+	const author = authorInput.value.trim();
+	if (author === "") {
 		authorError.textContent = "Title is required.";
 		authorInput.parentNode.classList.add("error");
 		authorInput.parentNode.classList.remove("success");
@@ -72,12 +58,18 @@ if (title === "") {
 		authorInput.parentNode.classList.remove("error");
 		authorInput.parentNode.classList.add("success");
 	}
-	if (
-		titleError.textContent === "" &&
-		authorError.textContent === " " &&
-		pagesError.textContent === ""
-	) {
-		createNewBook();
+	if (titleError.textContent === "" && authorError.textContent === "") {
+		const addBook = new Book(
+			titleInput.value,
+			authorInput.value,
+			pagesInput.value,
+			setRead(),
+		);
+		addBookToLibrary(addBook);
+		dialog.close();
+		clearForm();
+		createLibraryCards();
+		addEventListeners();
 	}
 });
 
@@ -109,12 +101,20 @@ function addBookToLibrary(book) {
 	myLibrary.push(book);
 }
 
+function setReadBtnText(index) {
+	if (myLibrary[index].read === "read") {
+		return "Mark unread";
+	}
+	return "Mark read";
+}
+
 function createLibraryCards() {
 	library.innerHTML = "";
 	for (const book of myLibrary) {
 		const bookDiv = document.createElement("div");
 		bookDiv.classList.add("book");
-		bookDiv.dataset.index = myLibrary.indexOf(book);
+		const index = myLibrary.indexOf(book);
+		bookDiv.dataset.index = index;
 		const titleDiv = document.createElement("p");
 		titleDiv.textContent = book.title;
 		const authorDiv = document.createElement("p");
@@ -126,7 +126,8 @@ function createLibraryCards() {
 		removeBtn.textContent = "Remove";
 		removeBtn.classList.add("remove");
 		const readBtn = document.createElement("button");
-		readBtn.textContent = "read | unread";
+		//		readBtn.textContent = "read|unread";
+		readBtn.textContent = setReadBtnText(index);
 		readBtn.classList.add("read");
 		const btnsDiv = document.createElement("div");
 		btnsDiv.classList.add("buttons-div");
