@@ -16,14 +16,14 @@
       <dialog id="dialog">
         <button id="closeBtn" autofocus>X</button>
         <form id="form">
-          <label for="titleInput">Title<input type="text" id="titleInput" required minlength="1">
+          <label for="titleInput">Title<input type="text" id="titleInput" minlength="1">
             <span class="error" aria-live="polite" id="titleError"></span></label>
           <label for="authorInput">Author</label><input type="text" id="authorInput" required minlength="1">
           <span class="error" aria-live="polite"></span>
-          <label for="pagesInput">No. of pages</label><input type="number" id="pagesInput" required>
+          <label for="pagesInput">No. of pages</label><input type="number" id="pagesInput" required min="1">
           <span class="error" aria-live="polite"></span>
           <label for="readCheckbox">Read?</label><input type="checkbox" id="readCheckbox">
-          <button type="submit" id="submitBtn">Submit</button>
+          <input type="submit" id="submitBtn" value="Add book">
         </form>
       </dialog>
       <button id="newBookBtn">New book</button>
