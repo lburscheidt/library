@@ -5,7 +5,17 @@ const dialog = document.querySelector("#dialog");
 const library = document.querySelector("#library");
 const myLibrary = [];
 const newBookBtn = document.querySelector("#newBookBtn");
-const submitBtn = document.querySelector("#submitBtn");
+const form = document.querySelector("#form");
+const title = document.querySelector("#title");
+const author = document.querySelector("#author");
+const pages = document.querySelector("#pages");
+const inputTitle = document.querySelector("#title").value;
+const inputAuthor = document.querySelector("#author").value;
+const inputPages = document.querySelector("#pages").value;
+const inputRead = document.querySelector("#read");
+const titleError = document.querySelector("#title +span.error");
+const authorError = document.querySelector("#author +span.error");
+const pagesError = document.querySelector("#pages +span.error");
 
 window.onload = () => {
 	createLibraryCards();
@@ -88,17 +98,58 @@ newBookBtn.addEventListener("click", () => {
 closeBtn.addEventListener("click", () => {
 	dialog.close();
 });
-form.addEventListener("submit", (e) => {
-	e.preventDefault();
-	dialog.close();
-	getInput();
-	createLibraryCards();
+
+title.addEventListener("click", (e) => {
+	if (title.validity.valid) {
+		titleError.textContent = "";
+		titleError.className = "error";
+	} else {
+		showError();
+	}
 });
 
+title.addEventListener("input", (e) => {
+	if (title.validity.valid) {
+		titleError.textContent = "";
+		titleError.className = "error";
+	} else {
+		showError();
+	}
+});
+
+form.addEventListener("submit", (e) => {
+	if (
+		!title.validity.valid ||
+		!author.validity.valid ||
+		!pages.validity.valid
+	) {
+		showError();
+		e.preventDefault();
+	} else {
+		e.preventDefault();
+		dialog.close();
+		getInput();
+		clearForm();
+		createLibraryCards();
+	}
+});
+
+function showError() {
+	if (!title.validity.tooShort) {
+		console.log("There was an error");
+		titleError.textContent = "Title error";
+		titleError.className = "error active";
+	}
+}
+
+function clearForm() {
+	title.innerHTML = "";
+	author.innerHTML = "";
+	pages.innerHTML = "";
+	inputRead.checked = false;
+}
+
 function getInput() {
-	const inputTitle = document.querySelector("#title").value;
-	const inputAuthor = document.querySelector("#author").value;
-	const inputPages = document.querySelector("#pages").value;
 	let inputRead;
 	if (document.querySelector("#read").checked) {
 		inputRead = "read";
