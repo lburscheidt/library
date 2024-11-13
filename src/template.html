@@ -16,12 +16,20 @@
       <dialog id="dialog">
         <button id="closeBtn" autofocus>X</button>
         <form id="form">
-          <label for="titleInput">Title<input type="text" id="titleInput" minlength="1">
-            <span class="error" aria-live="polite" id="titleError"></span></label>
-          <label for="authorInput">Author</label><input type="text" id="authorInput" required minlength="1">
-          <span class="error" aria-live="polite"></span>
-          <label for="pagesInput">No. of pages</label><input type="number" id="pagesInput" required min="1">
-          <span class="error" aria-live="polite"></span>
+          <div class="formdetails">
+            <label for="titleInput">Title</label><input type="text" id="titleInput">
+            <span class="error" aria-live="polite" id="titleError"></span>
+          </div>
+
+          <label for="authorInput">Author</label><input type="text" id="authorInput">
+          <span class="error" aria-live="polite" id="authorError"></span>
+          </div>
+
+          <div class="formdetails"><label for="pagesInput">No. of pages</label><input type="number" id="pagesInput">
+            <span id="pagesError">
+              <span class="error" aria-live="polite"></span>
+          </div>
+
           <label for="readCheckbox">Read?</label><input type="checkbox" id="readCheckbox">
           <input type="submit" id="submitBtn" value="Add book">
         </form>

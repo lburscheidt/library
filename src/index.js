@@ -1,6 +1,6 @@
 import "./style.css";
 
-const authorError = document.querySelector("#author +span.error");
+const authorError = document.querySelector("#authorError");
 const authorInput = document.querySelector("#authorInput");
 const closeBtn = document.querySelector("#closeBtn");
 const dialog = document.querySelector("#dialog");
@@ -8,11 +8,11 @@ const form = document.querySelector("#form");
 const library = document.querySelector("#library");
 const myLibrary = [];
 const newBookBtn = document.querySelector("#newBookBtn");
-const pagesError = document.querySelector("#pages +span.error");
+const pagesError = document.querySelector("#pagesError");
 const pagesInput = document.querySelector("#pagesInput");
 const readBtn = document.querySelector(".readBtn");
 const readCheckbox = document.querySelector("#readCheckbox");
-const titleError = document.querySelector("#title +span.error");
+const titleError = document.querySelector("#titleError");
 const titleInput = document.querySelector("#titleInput");
 
 function addEventListeners() {
@@ -29,14 +29,6 @@ function addEventListeners() {
 				case "read": {
 					myLibrary[index].toggleRead();
 					createLibraryCards();
-					//const read = myLibrary[index].read;
-					//if (read === "read") {
-					//	myLibrary[index].read = "not read yet";
-					//	createLibraryCards();
-					//} else {
-					//	myLibrary[index].read = "read";
-					//	createLibraryCards();
-					//}
 					break;
 				}
 			}
@@ -44,26 +36,49 @@ function addEventListeners() {
 	}
 }
 
+function createNewBook() {
+	const addBook = new Book(
+		titleInput.value,
+		authorInput.value,
+		pagesInput.value,
+		setRead(),
+	);
+	addBookToLibrary(addBook);
+	dialog.close();
+	clearForm();
+	createLibraryCards();
+	addEventListeners();
+}
+
 form.addEventListener("submit", (e) => {
 	e.preventDefault();
-
+	const title = titleInput.value.trim();
+	if (title === "") {
+		titleError.textContent = "Title is required.";
+		titleInput.parentNode.classList.add("error");
+		titleInput.parentNode.classList.remove("success");
+	} else {
+		titleError.textContent = "";
+		titleInput.parentNode.classList.remove("error");
+		titleInput.parentNode.classList.add("success");
+	}
+const author = authorInput.value.trim();
+if (title === "") {
+		authorError.textContent = "Title is required.";
+		authorInput.parentNode.classList.add("error");
+		authorInput.parentNode.classList.remove("success");
+	} else {
+		authorError.textContent = "";
+		authorInput.parentNode.classList.remove("error");
+		authorInput.parentNode.classList.add("success");
+	}
 	if (
-		titleInput.checkValidity() &&
-		authorInput.checkValidity() &&
-		pagesInput.checkValidity()
+		titleError.textContent === "" &&
+		authorError.textContent === " " &&
+		pagesError.textContent === ""
 	) {
-		const addBook = new Book(
-			titleInput.value,
-			authorInput.value,
-			pagesInput.value,
-			setRead(),
-		);
-		addBookToLibrary(addBook);
-		dialog.close();
-		clearForm();
-		createLibraryCards();
-		addEventListeners();
-	} else console.log(titleInput.reportValidity());
+		createNewBook();
+	}
 });
 
 window.onload = () => {
@@ -166,11 +181,3 @@ function setRead() {
 // 		showError();
 // 	}
 // });
-
-function showError() {
-	if (!titleInput.validity.tooShort) {
-		console.log("There was an error");
-		titleError.textContent = "Title error";
-		titleError.className = "error active";
-	}
-}

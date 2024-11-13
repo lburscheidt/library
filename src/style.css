@@ -93,11 +93,15 @@ header {
 }
 
 dialog[open] {
+	background-color: #bcb147;
+	border: none;
+	border-radius: 1rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
 	align-items: flex-start;
 	flex-wrap: wrap;
+	padding: 20px;
 	position: absolute;
 	float: left;
 	left: 50%;
@@ -112,7 +116,7 @@ form {
 }
 
 input {
-	border: 1px solid black;
+	border-radius: 0.5rem;
 	margin-bottom: 20px;
 }
 
@@ -156,13 +160,6 @@ aside {
 	background-color: #56e2d4;
 }
 
-button {
-	padding: 10px 20px;
-	border-radius: 0.5rem;
-	border: none;
-	background-color: #48bcb0;
-}
-
 aside > button {
 	margin-top: 50px;
 }
@@ -202,7 +199,7 @@ input:invalid:required {
 }
 
 input:valid {
-	border: 2px solid black;
+	border: 1px solid #48bcb0;
 }
 
 .error {
@@ -218,4 +215,21 @@ input:valid {
 }
 .error.active {
 	padding: 0.3em;
+}
+
+.formdetails {
+	display: flex;
+	flex-direction: column;
+}
+#closeBtn,
+#submitBtn {
+	align-self: flex-end;
+}
+
+button,
+input[type="submit"] {
+	padding: 10px 20px;
+	border-radius: 0.5rem;
+	border: none;
+	background-color: #48bcb0;
 }
